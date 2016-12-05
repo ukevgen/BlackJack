@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.spalah.courses.projects.blackjack"/>
+
+
+    <bean id="accountService" class="com.spalah.courses.projects.blackjack.model.service.AccountService" />
+    <bean id="tableService" class="com.spalah.courses.projects.blackjack.model.service.TableService" />
+    <bean id="tableGameService" class="com.spalah.courses.projects.blackjack.model.service.TableGameService" />
+
+
+    <bean id="accountDao" class="com.spalah.courses.projects.blackjack.model.dao.impl.AccountDaoImpl">
+        <constructor-arg ref="entityManagerFactory" />
+    </bean>
+    <bean id="tableDao" class="com.spalah.courses.projects.blackjack.model.dao.impl.TableDaoImpl">
+        <constructor-arg ref="entityManagerFactory" />
+    </bean>
+    <bean id="tableTypeDao" class="com.spalah.courses.projects.blackjack.model.dao.impl.TableTypeDaoImpl">
+        <constructor-arg ref="entityManagerFactory" />
+    </bean>
+    <bean id="tableGameDao" class="com.spalah.courses.projects.blackjack.model.dao.impl.TableGameDaoImpl">
+        <constructor-arg ref="entityManagerFactory" />
+    </bean>
+    <bean id="betDao" class="com.spalah.courses.projects.blackjack.model.dao.impl.BetDaoImpl">
+        <constructor-arg ref="entityManagerFactory" />
+    </bean>
+
+
+    <bean id="entityManagerFactory"
+          factory-method="getEntityManagerFactory"
+          class="com.spalah.courses.projects.blackjack.Main">
+        <constructor-arg value="com.spalah.courses.projects.blackjack"/>
+    </bean>
+
+    <mvc:annotation-driven />
+</beans>
